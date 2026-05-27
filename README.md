@@ -70,7 +70,7 @@ ufbt launch    # compile + upload to SD card + launch on Flipper
 
 The app appears at **Apps → GPIO → MR60FDA Radar**.
 
-The Flipper SDK is downloaded automatically to `~/.ufbt/` on first run.
+The Flipper SDK is downloaded automatically to ~/.ufbt/ on first run.
 
 ## PC sniffer
 
