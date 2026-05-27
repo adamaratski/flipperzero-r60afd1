@@ -13,8 +13,7 @@ Displays in real time: **presence**, **motion**, **fall alarm**, **distance**, *
 | Pin 13 (TX, PB6) | RX | UART TX→RX |
 | Pin 14 (RX, PB7) | TX | UART RX←TX |
 
-> TX and RX are **crossed**.  
-> Before launching enable **Settings → Power → 5V on GPIO: ON** — otherwise the radar gets no power.
+**Note:** TX and RX are **crossed**. Before launching enable **Settings → Power → 5V on GPIO: ON** — otherwise the radar gets no power.
 
 ![Wiring diagram](flipper_zero_r60afd1_wiring.svg)
 
@@ -57,7 +56,7 @@ Checksum = sum of all bytes from `53` through last data byte, `& 0xFF`.
 | 0x01 | 0x01 | 1 B      | System heartbeat |
 | 0x07 | 0x07 | 1 B      | Function status flag |
 
-> **On startup** the app sends a presence query (`53 59 80 81 00 01 0F BD 54 43`) so the display is correct immediately — even if the radar already detected someone before the app opened.
+**Note:** On startup the app sends a presence query (`53 59 80 81 00 01 0F BD 54 43`) so the display is correct immediately — even if the radar already detected someone before the app opened.
 
 ## Build & flash
 
