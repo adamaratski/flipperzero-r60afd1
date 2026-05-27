@@ -31,12 +31,13 @@ Displays in real time: **presence**, **motion**, **fall alarm**, **distance**, *
 └──────────────────────────────┘
 ```
 
-When a fall is detected **Fall** inverts to `! FALL !`.
+When a fall is detected **Fall** inverts to **! FALL !**.
 
 ## Protocol
 
-Frames: `53 59 [CTRL] [CMD] [LEN_H] [LEN_L] [DATA...] [CHKSUM] 54 43`  
-Checksum = sum of all bytes from `53` through last data byte, `& 0xFF`.
+Frame format: 53 59 [CTRL] [CMD] [LEN_H] [LEN_L] [DATA...] [CHKSUM] 54 43
+
+Checksum = sum of all bytes from 53 through last data byte, & 0xFF.
 
 | CTRL | CMD  | Data     | Description |
 |------|------|----------|-------------|
@@ -54,7 +55,7 @@ Checksum = sum of all bytes from `53` through last data byte, `& 0xFF`.
 | 0x01 | 0x01 | 1 B      | System heartbeat |
 | 0x07 | 0x07 | 1 B      | Function status flag |
 
-**Note:** On startup the app sends a presence query (`53 59 80 81 00 01 0F BD 54 43`) so the display is correct immediately — even if the radar already detected someone before the app opened.
+**Note:** On startup the app sends a presence query (53 59 80 81 00 01 0F BD 54 43) so the display is correct immediately — even if the radar already detected someone before the app opened.
 
 ## Build & flash
 
@@ -73,7 +74,7 @@ The Flipper SDK is downloaded automatically to `~/.ufbt/` on first run.
 
 ## PC sniffer
 
-Requires **pyserial**: `pip install pyserial`
+Requires **pyserial** (pip install pyserial).
 
 Put Flipper into UART Bridge mode (**Apps → GPIO → [UART] Bridge**, baud 115200), then:
 
@@ -103,6 +104,6 @@ Requires OFW ≥ 1.0 (API 87+). Tested on **OFW 1.4.3**.
 
 ## Possible extensions
 
-- **TX commands** — change scene (living room / bedroom / bathroom), adjust sensitivity via `furi_hal_serial_tx()`
-- **Settings menu** — `variable_item_list` for scene and threshold config
-- **SD logging** — `storage_file_write` to record frames for offline analysis
+- **TX commands** — change scene (living room / bedroom / bathroom), adjust sensitivity via furi_hal_serial_tx()
+- **Settings menu** — variable_item_list for scene and threshold config
+- **SD logging** — storage_file_write to record frames for offline analysis
