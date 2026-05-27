@@ -15,8 +15,6 @@ Displays in real time: **presence**, **motion**, **fall alarm**, **distance**, *
 
 **Note:** TX and RX are **crossed**. Before launching enable **Settings → Power → 5V on GPIO: ON** — otherwise the radar gets no power.
 
-![Wiring diagram](flipper_zero_r60afd1_wiring.svg)
-
 ## Screen
 
 ```
