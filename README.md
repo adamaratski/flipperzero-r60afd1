@@ -17,19 +17,12 @@ Displays in real time: **presence**, **motion**, **fall alarm**, **distance**, *
 
 ## Screen
 
-```
-┌──────────────────────────────┐
-│  MR60FDA Radar            ■  │  ■ = live data  □ = no signal
-├──────────────────┬───────────┤
-│ HR     66 bpm    │ ┌───────┐ │
-│ Resp   14 /min   │ │PRESENT│ │  inverted = person detected
-│ Dist  166 cm     │ Mot  actv │
-│ BSign   4        │ Fall   no │
-│                  │ Time   0s │
-├──────────────────┴───────────┤
-│ Mv: ▐██░░░░  #042      [Back]│  body movement bars + frame counter
-└──────────────────────────────┘
-```
+    MR60FDA Radar            [■]
+    HR     66 bpm   | PRESENT
+    Resp   14 /min  | Mot  actv
+    Dist  166 cm    | Fall   no
+    BSign   4       | Time   0s
+    Mv: signal bars         [Back]
 
 When a fall is detected **Fall** inverts to **! FALL !**.
 
@@ -59,14 +52,13 @@ Checksum = sum of all bytes from 53 through last data byte, & 0xFF.
 
 ## Build & flash
 
-```bash
-# Install uFBT (once)
-python3 -m pip install ufbt --break-system-packages
+Install uFBT once: python3 -m pip install ufbt --break-system-packages
 
-cd mr60fda_radar
-ufbt           # compile → dist/mr60fda_radar.fap
-ufbt launch    # compile + upload to SD card + launch on Flipper
-```
+Then build and flash:
+
+    cd mr60fda_radar
+    ufbt           # compile to dist/mr60fda_radar.fap
+    ufbt launch    # compile + upload to SD card + launch on Flipper
 
 The app appears at **Apps → GPIO → MR60FDA Radar**.
 
@@ -76,27 +68,21 @@ The Flipper SDK is downloaded automatically to ~/.ufbt/ on first run.
 
 Requires **pyserial** (pip install pyserial).
 
-Put Flipper into UART Bridge mode (**Apps → GPIO → [UART] Bridge**, baud 115200), then:
+Put Flipper into UART Bridge mode (**Apps → GPIO → [UART] Bridge**, baud 115200), then run:
 
-```bash
-python3 sniffer.py /dev/ttyACM0 --raw
-```
+    python3 sniffer.py /dev/ttyACM0 --raw
 
 Prints every decoded frame with a timestamp and hex dump.
 
 ## File structure
 
-```
-mr60fda_radar/
-├── application.fam               FAP manifest (GPIO, 4 KB stack)
-├── mr60fda_app.c                 main loop, UART ISR, GUI, input
-├── mr60fda_parser.h              protocol types and parser API
-├── mr60fda_parser.c              state machine, auto-resync, CRC
-├── sniffer.py                    PC-side debug sniffer
-├── icon.png                      10×10 px monochrome app icon
-├── flipper_zero_r60afd1_wiring.svg   wiring diagram
-└── screen.svg                    screen layout diagram
-```
+- application.fam — FAP manifest (GPIO, 4 KB stack)
+- mr60fda_app.c — main loop, UART ISR, GUI, input
+- mr60fda_parser.h — protocol types and parser API
+- mr60fda_parser.c — state machine, auto-resync, CRC
+- sniffer.py — PC-side debug sniffer
+- icon.png — 10×10 px monochrome app icon
+- flipper_zero_r60afd1_wiring.svg — wiring diagram
 
 ## Firmware compatibility
 
