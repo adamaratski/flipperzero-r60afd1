@@ -17,14 +17,15 @@ Displays in real time: **presence**, **motion**, **fall alarm**, **distance**, *
 
 ## Screen
 
-    MR60FDA Radar            [■]
-    HR     66 bpm   | PRESENT
-    Resp   14 /min  | Mot  actv
-    Dist  166 cm    | Fall   no
-    BSign   4       | Time   0s
-    Mv: signal bars         [Back]
+MR60FDA Radar [live indicator]
 
-When a fall is detected **Fall** inverts to **! FALL !**.
+Left column: HR (bpm), Resp (/min), Dist (cm), BSign
+
+Right column: PRESENT/absent box, Motion state, Fall alarm, Residence time
+
+Footer: body movement signal bars, frame counter, Back button
+
+When a fall is detected, the Fall field inverts to **! FALL !**.
 
 ## Protocol
 
@@ -54,11 +55,7 @@ Checksum = sum of all bytes from 53 through last data byte, & 0xFF.
 
 Install uFBT once: python3 -m pip install ufbt --break-system-packages
 
-Then build and flash:
-
-    cd mr60fda_radar
-    ufbt           # compile to dist/mr60fda_radar.fap
-    ufbt launch    # compile + upload to SD card + launch on Flipper
+Then in the project directory run ufbt to build, ufbt launch to flash.
 
 The app appears at **Apps → GPIO → MR60FDA Radar**.
 
@@ -68,9 +65,7 @@ The Flipper SDK is downloaded automatically to ~/.ufbt/ on first run.
 
 Requires **pyserial** (pip install pyserial).
 
-Put Flipper into UART Bridge mode (**Apps → GPIO → [UART] Bridge**, baud 115200), then run:
-
-    python3 sniffer.py /dev/ttyACM0 --raw
+Put Flipper into UART Bridge mode (**Apps → GPIO → [UART] Bridge**, baud 115200), then run: python3 sniffer.py /dev/ttyACM0 --raw
 
 Prints every decoded frame with a timestamp and hex dump.
 
