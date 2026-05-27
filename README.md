@@ -17,7 +17,7 @@ Displays in real time: **presence**, **motion**, **fall alarm**, **distance**, *
 
 ## Screen
 
-MR60FDA Radar [live indicator]
+MR60FDA Radar (live indicator)
 
 Left column: HR (bpm), Resp (/min), Dist (cm), BSign
 
@@ -29,7 +29,7 @@ When a fall is detected, the Fall field inverts to **! FALL !**.
 
 ## Protocol
 
-Frame format: 53 59 [CTRL] [CMD] [LEN_H] [LEN_L] [DATA...] [CHKSUM] 54 43
+Frame format: 53 59 {CTRL} {CMD} {LEN_H} {LEN_L} {DATA...} {CHKSUM} 54 43
 
 Checksum = sum of all bytes from 53 through last data byte, & 0xFF.
 
@@ -65,7 +65,7 @@ The Flipper SDK is downloaded automatically to ~/.ufbt/ on first run.
 
 Requires **pyserial** (pip install pyserial).
 
-Put Flipper into UART Bridge mode (**Apps → GPIO → [UART] Bridge**, baud 115200), then run: python3 sniffer.py /dev/ttyACM0 --raw
+Put Flipper into UART Bridge mode (**Apps → GPIO → UART Bridge**, baud 115200), then run: python3 sniffer.py /dev/ttyACM0 --raw
 
 Prints every decoded frame with a timestamp and hex dump.
 
